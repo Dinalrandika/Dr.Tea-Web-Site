@@ -11,7 +11,7 @@ xhr.onreadystatechange = function () {
 };
 xhr.send();
 
-// Alternatively, you can embed the value directly in the JavaScript code
+
 var sessionVariable = "<?php echo $_SESSION['username']; ?>";
 console.log(sessionVariable);
 
@@ -160,25 +160,26 @@ var shoppingCart = (function () {
   });
 
 
-  function displayCart() {
-    var cartArray = shoppingCart.listCart();
-    var output = "";
-    for (var i in cartArray) {
-      output += "<tr>"
-        + "<td>" + cartArray[i].name + "</td>"
-        + "<td>(" + cartArray[i].price + ")</td>"
-        + "<td><div class='input-group'>"
-        + "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
-        + "</div></td>"
-        + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>"
-        + " = "
-        + "<td>" + cartArray[i].total + "</td>"
-        + "</tr>";
+    // Display the cart contents
+    function displayCart() {
+        var cartArray = shoppingCart.listCart();
+        var output = "";
+        for (var i in cartArray) {
+            output += "<tr>"
+                + "<td>" + cartArray[i].name + "</td>"
+                + "<td>(" + cartArray[i].price + ")</td>"
+                + "<td><div class='input-group'>"
+                + "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
+                + "</div></td>"
+                + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + ">X</button></td>"
+                + " = "
+                + "<td>" + cartArray[i].total + "</td>"
+                + "</tr>";
+        }
+        $('.show-cart').html(output);
+        $('.total-cart').html(shoppingCart.totalCart());
+        $('.total-count').html(shoppingCart.totalCount());
     }
-    $('.show-cart').html(output);
-    $('.total-cart').html(shoppingCart.totalCart());
-    $('.total-count').html(shoppingCart.totalCount());
-  }
 
   // Delete item button
 
